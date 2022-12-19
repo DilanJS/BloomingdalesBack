@@ -13,15 +13,19 @@ public class ProductService {
     @Autowired
     private ProductDao productDao;
 
-    public Product addNewProduct(Product product){
-       return productDao.save(product);
+    public Product addNewProduct(Product product) {
+        return productDao.save(product);
     }
 
-    public List<Product> getAllProducts(){
+    public List<Product> getAllProducts() {
         return (List<Product>) productDao.findAll();
     }
 
-    public void deleteProductDetails(Integer productId){
+    public void deleteProductDetails(Integer productId) {
         productDao.deleteById(productId);
+    }
+
+    public Product getProductDetailsById(Integer productId) {
+        return productDao.findById(productId).get();
     }
 }
