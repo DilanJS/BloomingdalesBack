@@ -20,6 +20,8 @@ import java.io.IOException;
 @Component
 public class JwtRequestFilter extends OncePerRequestFilter {
 
+    public static String CURRENT_USER = "";
+
     @Autowired
     private JwtUtil jwtUtil;
 
@@ -40,13 +42,13 @@ public class JwtRequestFilter extends OncePerRequestFilter {
             try {
                 username = jwtUtil.getUserNameFromToken(jwtToken);
 
+                CURRENT_USER=username;
+
             } catch (IllegalArgumentException e) {
                 System.out.println("Unable to get JWT token");
             } catch (ExpiredJwtException e) {
                 System.out.println("Jwt token is expired");
             }
-
-
         } else {
             System.out.println("Jwt token does not start with Bearer");
         }
