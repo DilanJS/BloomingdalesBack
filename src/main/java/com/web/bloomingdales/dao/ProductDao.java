@@ -9,6 +9,11 @@ import java.util.List;
 
 @Repository
 public interface ProductDao extends CrudRepository<Product,Integer> {
-
     public List<Product> findAll(Pageable pageable);
+
+    public List<Product>findByProductNameContainingIgnoreOrProductDescriptionContainingIgnore(
+            String key1,
+            String key2,
+            Pageable pageable);
+
 }
