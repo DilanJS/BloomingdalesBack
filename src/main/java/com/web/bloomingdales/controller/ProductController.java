@@ -3,7 +3,6 @@ package com.web.bloomingdales.controller;
 import com.web.bloomingdales.entity.ImageModel;
 import com.web.bloomingdales.entity.Product;
 import com.web.bloomingdales.service.ProductService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -17,8 +16,12 @@ import java.util.Set;
 @RestController
 public class ProductController {
 
-    @Autowired
-    private ProductService productService;
+
+    private final ProductService productService;
+
+    public ProductController(ProductService productService) {
+        this.productService = productService;
+    }
 
     @PreAuthorize("hasRole('Admin')")
     @PostMapping(value = {"/addNewProduct"}, consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})

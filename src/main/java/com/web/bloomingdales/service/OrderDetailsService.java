@@ -5,7 +5,6 @@ import com.web.bloomingdales.dao.OrderDetailDao;
 import com.web.bloomingdales.dao.ProductDao;
 import com.web.bloomingdales.dao.UserDao;
 import com.web.bloomingdales.entity.*;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,14 +14,20 @@ public class OrderDetailsService {
 
     private static final String ORDER_PLACED="Placed";
 
-    @Autowired
-    private OrderDetailDao orderDetailDao;
 
-    @Autowired
-    private ProductDao productDao;
+    private final OrderDetailDao orderDetailDao;
 
-    @Autowired
-    private UserDao userDao;
+
+    private final ProductDao productDao;
+
+
+    private final UserDao userDao;
+
+    public OrderDetailsService(OrderDetailDao orderDetailDao, ProductDao productDao, UserDao userDao) {
+        this.orderDetailDao = orderDetailDao;
+        this.productDao = productDao;
+        this.userDao = userDao;
+    }
 
     public void placeOrder(OrderInput orderInput){
         List<OrderProductQuantity> productQuantityList =orderInput.getOrderProductQuantities();

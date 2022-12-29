@@ -1,6 +1,5 @@
 package com.web.bloomingdales.configuration;
 
-import com.web.bloomingdales.service.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,14 +21,16 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Autowired
-    private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+@Autowired
+    private  JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 
     @Autowired
-    private JwtRequestFilter jwtRequestFilter;
+    private  JwtRequestFilter jwtRequestFilter;
 
     @Autowired
-    private UserDetailsService jwtService;
+    private  UserDetailsService jwtService;
+
+
 
     @Bean
     @Override

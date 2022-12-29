@@ -26,7 +26,7 @@ public class ProductService {
         if (searchKey.equals("")){
             return (List<Product>) productDao.findAll(pageable);
         }else {
-            return productDao.findByProductNameContainingIgnoreOrProductDescriptionContainingIgnore(
+            return productDao.findByProductNameContainingOrProductDescriptionContaining(
                     searchKey,searchKey,pageable
             );
         }
@@ -43,7 +43,6 @@ public class ProductService {
     public List<Product> getProductDetails(boolean isSingleProductCheckout, Integer productId){
         if (isSingleProductCheckout){
             //single product
-
             List<Product> list=new ArrayList<>();
             Product product=productDao.findById(productId).get();
             list.add(product);

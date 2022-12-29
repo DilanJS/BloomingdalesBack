@@ -14,14 +14,16 @@ import java.util.Set;
 @Service
 public class UserService {
 
-    @Autowired
-    private UserDao userDao;
+    private final UserDao userDao;
+    private final RoleDao roleDao;
+    private final PasswordEncoder passwordEncoder;
 
-    @Autowired
-    private RoleDao roleDao;
+    public UserService(UserDao userDao, RoleDao roleDao, PasswordEncoder passwordEncoder) {
+        this.userDao = userDao;
+        this.roleDao = roleDao;
+        this.passwordEncoder = passwordEncoder;
+    }
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
     public User registerNewUser(User user){
 
         Role role=roleDao.findById("User").get();

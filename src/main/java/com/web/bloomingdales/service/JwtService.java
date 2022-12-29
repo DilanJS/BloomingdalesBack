@@ -22,14 +22,19 @@ import java.util.Set;
 @Service
 public class JwtService implements UserDetailsService {
 
-    @Autowired
-    private UserDao userDao;
 
-    @Autowired
-    private JwtUtil jwtUtil;
+    private final UserDao userDao;
+
+    private final JwtUtil jwtUtil;
 
     @Autowired
     private AuthenticationManager authenticationManager;
+
+    public JwtService(UserDao userDao, JwtUtil jwtUtil) {
+        this.userDao = userDao;
+        this.jwtUtil = jwtUtil;
+
+    }
 
     public JwtResponse createJwtToken(JwtRequest jwtRequest) throws Exception {
         String username = jwtRequest.getUsername();
@@ -40,9 +45,9 @@ public class JwtService implements UserDetailsService {
 
         String newGeneratedToken = jwtUtil.generateToken(userDetails);
 
-        User user =userDao.findById(username).get();
+        User user = userDao.findById(username).get();
 
-        return new JwtResponse(user,newGeneratedToken);
+        return new JwtResponse(user, newGeneratedToken);
     }
 
     @Override
@@ -56,7 +61,7 @@ public class JwtService implements UserDetailsService {
                     getAuthorities(user)
             );
         } else {
-            throw new UsernameNotFoundException("Username is not valid" +username);
+            throw new UsernameNotFoundException("Username is not valid" + username);
         }
     }
 
